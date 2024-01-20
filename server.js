@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
   return res.json("from backend side");
 });
 
-app.get("/products", (req, res) => {
+app.get("/Products", (req, res) => {
   const sql = "SELECT * FROM products";
   db.query(sql, (error, data) => {
     if (error) return res.json(error);
