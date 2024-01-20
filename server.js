@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.get("/", (req, res) => {
+app.get("/products", (req, res) => {
   return res.json("from backend side");
 });
 
