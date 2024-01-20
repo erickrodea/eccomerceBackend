@@ -17,25 +17,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.get("/", (req, res) => {
+app.get("/products", (req, res) => {
   return res.json("from backend side");
 });
 
-app.get("/products", (req, res) => {
-  let query = `SELECT * FROM products`;
-  const sortOrder = req.query.sortOrder;
-  const category = req.query.category;
-  const id = req.query.id;
-  if (sortOrder) {
-    query = `SELECT * FROM products ORDER By productPrice ${sortOrder}`;
-  } else if (category) {
-    query = `SELECT * FROM products WHERE productCategory = "${category}"`;
-  } else if (id) {
-    query = `SELECT * FROM products WHERE idproducts IN (${id})`;
-  }
-
-  db.query(query, (err, data) => {
-    if (err) return res.json(err);
+app.get("/", (req, res) => {
+  const sql = "SELECT * FROM products";
+  db.query(sql, (error, data) => {
+    if (error) return res.json(error);
     return res.json(data);
   });
 });
